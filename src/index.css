@@ -1,0 +1,446 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme {
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+body.light-theme {
+  background-color: #ffffff;
+  color: #213547;
+}
+
+/* App.css */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dark theme */
+.app.dark {
+  --bg-color: #242424;
+  --text-color: rgba(255, 255, 255, 0.87);
+  --tile-bg: #3a3a3c;
+  --tile-border: #565758;
+  --key-bg: #818384;
+  --key-hover-bg: #6a6c6d;
+  --key-text: #ffffff;
+  --correct: #6aaa64;
+  --present: #c9b458;
+  --absent: #3a3a3c;
+  --modal-bg: #1a1a1a;
+  --modal-border: #565758;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Light theme */
+.app.light {
+  --bg-color: #ffffff;
+  --text-color: #213547;
+  --tile-bg: #d3d6da;
+  --tile-border: #d3d6da;
+  --key-bg: #d3d6da;
+  --key-hover-bg: #bcc0c4;
+  --key-text: #000000;
+  --correct: #6aaa64;
+  --present: #c9b458;
+  --absent: #787c7e;
+  --modal-bg: #ffffff;
+  --modal-border: #d3d6da;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+header p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  /* Set a specific max-height to ensure everything fits in viewport */
+  max-height: calc(100vh - 120px);
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guess-row {
+  display: flex;
+  gap: 12px;
+}
+
+.word-grid {
+  display: flex;
+  gap: 4px;
+}
+
+.word-grid.solved {
+  opacity: 0.6;
+}
+
+.letter-box {
+  width: 35px;
+  height: 35px;
+  border: 2px solid var(--tile-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.letter-box.empty {
+  background-color: transparent;
+}
+
+.letter-box.green { 
+  background-color: var(--correct); 
+  border-color: var(--correct);
+  color: white;
+}
+
+.letter-box.yellow { 
+  background-color: var(--present);
+  border-color: var(--present);
+  color: white;
+}
+
+.letter-box.ash { 
+  background-color: var(--absent);
+  border-color: var(--absent);
+  color: white;
+}
+
+.keyboard {
+  width: 100%;
+  max-width: 500px;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.keyboard-key {
+  position: relative;
+  min-width: 30px;
+  height: 45px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--key-bg);
+  color: var(--key-text);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.keyboard-sections {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.keyboard-section {
+  flex: 1;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
+}
+
+.keyboard-section:last-child { 
+  border-right: none; 
+}
+
+.keyboard-letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.keyboard-key.special-key { 
+  min-width: 60px; 
+  font-size: 0.75rem;
+}
+
+.keyboard-key:hover { 
+  background-color: var(--key-hover-bg);
+}
+
+/* Section Colors */
+.keyboard-section.green { 
+  background-color: var(--correct);
+}
+
+.keyboard-section.yellow { 
+  background-color: var(--present);
+}
+
+.keyboard-section.ash { 
+  background-color: var(--absent);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--key-bg);
+  color: var(--key-text);
+  border: none;
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  background-color: var(--key-hover-bg);
+}
+
+.input-area {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  margin: 0;
+  height: 20px;
+}
+
+/* Completely hide the input field while keeping it functional */
+.hidden-input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -1;
+}
+
+.error-message {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #e76e55;
+  font-weight: bold;
+  padding: 5px;
+  animation: fadeIn 0.3s;
+  white-space: nowrap;
+  background-color: var(--bg-color);
+  z-index: 10;
+}
+
+.attempts-counter {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Game over modal */
+.game-over-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: var(--modal-bg);
+  border: 2px solid var(--modal-border);
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.secret-words-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.secret-words-list li {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 6px 0;
+  color: var(--correct);
+}
+
+.reset-button {
+  background-color: var(--correct);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.reset-button:hover {
+  transform: scale(1.05);
+  background-color: #5c9658;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+    margin-top: 15px;
+  }
+  
+  .guess-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+@media (max-height: 700px) {
+  .letter-box {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .keyboard-key {
+    min-width: 28px;
+    height: 35px;
+  }
+  
+  .keyboard-key.special-key {
+    min-width: 50px;
+  }
+  
+  header h1 {
+    font-size: 1.8rem;
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+  
+  header p {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .keyboard-row {
+    margin-bottom: 3px;
+  }
+}
+
+/* Portrait mode on mobile */
+@media (max-width: 480px) {
+  .guess-row {
+    gap: 5px;
+  }
+  
+  .letter-box {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+  
+  .keyboard-key {
+    min-width: 24px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .keyboard-key.special-key {
+    min-width: 48px;
+    font-size: 0.7rem;
+  }
+  
+  .theme-toggle {
+    padding: 4px 8px;
+    font-size: 1rem;
+  }
+}
